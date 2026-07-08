@@ -13,7 +13,7 @@ import {
   RiRefreshLine,
   RiHistoryLine,
   RiCheckboxCircleLine,
-  RiAlgorithmLine,
+  RiBrainLine,
   RiFireLine,
   RiGroupLine,
   RiArrowUpSLine,
@@ -73,16 +73,11 @@ function UserCard({ user, onEdit }) {
 
       <div className="uc-dsa">
         <div className="uc-dsa-row">
-          <span className="uc-dsa-label">Equipment Mask</span>
-          <span className="uc-dsa-value">
-            {user.equipment_mask} &nbsp;
-            <span style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: 'var(--gray-400)' }}>
-              {user.equipment_binary}
-            </span>
-          </span>
+          <span className="uc-dsa-label">Equipment</span>
+          <span className="uc-dsa-value">{(user.equipment || []).length} items selected</span>
         </div>
         <div className="uc-dsa-row">
-          <span className="uc-dsa-label">Compatible</span>
+          <span className="uc-dsa-label">Exercises Available</span>
           <span className="uc-dsa-value">{user.compatible_exercises} / 25</span>
         </div>
         <div className="uc-dsa-row">
@@ -92,10 +87,8 @@ function UserCard({ user, onEdit }) {
           </span>
         </div>
         <div className="uc-dsa-row">
-          <span className="uc-dsa-label">Time Budget</span>
-          <span className="uc-dsa-value">
-            {Math.round(user.available_minutes * 60 / 3)} units ({user.available_minutes} min)
-          </span>
+          <span className="uc-dsa-label">Session Time</span>
+          <span className="uc-dsa-value">{user.available_minutes} min</span>
         </div>
       </div>
 
@@ -169,12 +162,6 @@ function ExerciseCard({ ex, index }) {
       {expanded && (
         <div className="exercise-desc">
           <p>{ex.description}</p>
-          <div className="exercise-bitmask">
-            <span className="dsa-label">Equipment mask:</span>
-            <span className="code-inline">
-              {ex.equipment_mask} ({`0b${ex.equipment_mask.toString(2).padStart(8, '0')}`})
-            </span>
-          </div>
         </div>
       )}
     </div>
@@ -228,12 +215,7 @@ function SummaryPanel({ summary, user }) {
         </div>
       </div>
 
-      <div className="summary-bitmask">
-        <span className="dsa-label">Equipment Mask</span>
-        <span className="code-inline">
-          {summary.user_mask} = 0b{summary.user_mask?.toString(2).padStart(8,'0')}
-        </span>
-      </div>
+
     </div>
   );
 }
@@ -305,7 +287,7 @@ export default function Dashboard({ initialUser, onEditProfile }) {
 
   const TABS = [
     { id: 'plan',    label: 'Workout Plan',    icon: <RiCheckboxCircleLine size={14} /> },
-    { id: 'trace',   label: 'Algorithm Trace', icon: <RiAlgorithmLine size={14} /> },
+    { id: 'trace',   label: 'Algorithm Trace', icon: <RiBrainLine size={14} /> },
     { id: 'history', label: 'History',         icon: <RiHistoryLine size={14} /> },
   ];
 
@@ -343,7 +325,7 @@ export default function Dashboard({ initialUser, onEditProfile }) {
               Hello, <strong>{user.name}</strong>. Ready for your workout?
             </span>
             <span className="plan-subtitle">
-              {user.fitness_level} · {user.available_minutes} min · {user.compatible_exercises} exercises available
+              {user.fitness_level} · {user.available_minutes} min session
             </span>
           </div>
           <button

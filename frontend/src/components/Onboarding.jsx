@@ -156,9 +156,7 @@ function StepFitness({ data, onChange }) {
             >
               <span className="level-name">{lvl.label}</span>
               <span className="level-desc">{lvl.desc}</span>
-              <div className="level-dsa-note">
-                Knapsack: ×{lvl.id === 'beginner' ? '1.5' : lvl.id === 'intermediate' ? '1.0' : '0.75'}
-              </div>
+
             </button>
           ))}
         </div>
@@ -195,9 +193,7 @@ function StepFitness({ data, onChange }) {
           />
           <span className="time-value">{data.available_minutes}<span style={{fontSize:11}}> min</span></span>
         </div>
-        <div className="time-dsa">
-          Knapsack W = {data.available_minutes} × 60 / 3 = <strong>{Math.round(data.available_minutes * 60 / 3)}</strong> fatigue units
-        </div>
+
       </div>
     </div>
   );
@@ -231,31 +227,10 @@ function StepEquipment({ data, onChange }) {
           >
             <span className="equip-icon">{eq.icon}</span>
             <span className="equip-label">{eq.label}</span>
-            <span className="equip-bit">bit {Math.log2(eq.bit)}</span>
           </button>
         ))}
       </div>
 
-      <div className="live-bitmask">
-        <span className="bitmask-title">Equipment Bitmask</span>
-        <div className="bitmask-row">
-          {EQUIPMENT_OPTIONS.map(eq => (
-            <div
-              key={eq.id}
-              className={`mask-cell ${data.equipment.includes(eq.id) ? 'mask-cell--on' : 'mask-cell--off'}`}
-            >
-              <span className="mask-bit">{data.equipment.includes(eq.id) ? '1' : '0'}</span>
-              <span className="mask-lbl">{eq.label.split(' ')[0].slice(0,3)}</span>
-            </div>
-          ))}
-        </div>
-        <div className="bitmask-decimal">
-          = <strong>{mask}</strong> (decimal) &nbsp;|&nbsp;
-          <span style={{ fontFamily: 'var(--font-mono)', fontSize: 12 }}>
-            {bin8(mask)}
-          </span> (binary)
-        </div>
-      </div>
     </div>
   );
 }
@@ -271,7 +246,7 @@ function StepMuscles({ data, onChange }) {
   return (
     <div className="step-body">
       <p className="step-hint">
-        Select target muscle groups. Selected muscles get a 40% value bonus in the Knapsack DP.
+        Select the muscle groups you want to focus on in your workouts.
       </p>
       <div className="muscle-grid">
         {MUSCLE_OPTIONS.map(m => (
@@ -283,7 +258,7 @@ function StepMuscles({ data, onChange }) {
           >
             <span className="muscle-name">{m.id}</span>
             {data.target_muscles.includes(m.id) && (
-              <span className="muscle-bonus">+40% DP</span>
+              <span className="muscle-bonus">✓</span>
             )}
           </button>
         ))}
@@ -301,8 +276,8 @@ function bin8(n) { return '0b' + n.toString(2).padStart(8, '0'); }
 const STEPS = [
   { id: 'personal',  title: 'About You',       subtitle: 'Personal details', icon: <RiUserLine /> },
   { id: 'fitness',   title: 'Fitness Profile', subtitle: 'Level & goal',     icon: <RiBarChartBoxLine /> },
-  { id: 'equipment', title: 'Equipment',       subtitle: 'Builds bitmask',   icon: <RiToolsLine /> },
-  { id: 'muscles',   title: 'Target Muscles',  subtitle: 'DP priority',      icon: <RiBodyScanLine /> },
+  { id: 'equipment', title: 'Equipment',       subtitle: 'What you have',    icon: <RiToolsLine /> },
+  { id: 'muscles',   title: 'Target Muscles',  subtitle: 'Focus areas',      icon: <RiBodyScanLine /> },
 ];
 
 const DEFAULT_DATA = {
@@ -381,7 +356,7 @@ export default function Onboarding({ onComplete }) {
           </div>
           <h1 className="ob-title">Build Your Personal Engine</h1>
           <p className="ob-subtitle">
-            Your details power all 4 DSA algorithms — different inputs, different optimal workouts.
+            Your details power a personalized workout engine — different inputs, different optimal workouts.
           </p>
         </div>
 

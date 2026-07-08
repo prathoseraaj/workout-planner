@@ -99,9 +99,9 @@ export default function App() {
         <div className="footer-inner">
           <span>FitDSA — Personalized Workout Planning</span>
           <div className="footer-chips">
-            <span className="footer-chip">Bitmask O(n)</span>
-            <span className="footer-chip">Knapsack O(n×W)</span>
-            <span className="footer-chip">Graph BFS O(V+E)</span>
+            <span className="footer-chip">AI-Powered</span>
+            <span className="footer-chip">Personalized Plans</span>
+            <span className="footer-chip">Smart Scheduling</span>
             <span className="footer-chip">SQLite Storage</span>
           </div>
         </div>
