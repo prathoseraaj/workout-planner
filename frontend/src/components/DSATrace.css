@@ -1,0 +1,309 @@
+/* DSATrace.css — Premium dark B&W */
+
+.dsa-trace { display: flex; flex-direction: column; gap: 20px; }
+
+/* ── Pipeline flow ────────────────────────────────────────── */
+.pipeline-flow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding: 14px 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  overflow-x: auto;
+}
+
+.step-badge {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 14px;
+  border-radius: var(--r-md);
+  background: var(--surface-2);
+  border: 1px solid var(--border-mid);
+  white-space: nowrap;
+}
+
+.step-num {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--gray-200);
+}
+
+.step-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.pipeline-arrow {
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+/* ── Trace cards ──────────────────────────────────────────── */
+.trace-cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+@media (max-width: 900px) { .trace-cards { grid-template-columns: 1fr; } }
+
+.trace-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: border-color var(--t-base);
+  overflow: hidden;
+}
+.trace-card:hover { border-color: var(--border-mid); }
+
+.trace-card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.trace-icon {
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+  color: var(--text-secondary);
+  width: 32px;
+  height: 32px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.trace-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-primary);
+  flex: 1;
+}
+
+.trace-glow { display: none; }
+
+.trace-card-body { display: flex; flex-direction: column; gap: 10px; }
+
+.trace-desc {
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.65;
+  padding: 8px 12px;
+  background: var(--surface-2);
+  border-radius: var(--r-sm);
+  border-left: 2px solid var(--border-mid);
+}
+
+/* ── Complexity chip ──────────────────────────────────────── */
+.complexity-chip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 10px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+}
+.complexity-label {
+  font-size: 9px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.complexity-value {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--gray-100);
+}
+
+/* ── Bitmask visual ───────────────────────────────────────── */
+.bitmask-visual {
+  display: flex;
+  gap: 4px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.bitmask-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding: 7px 6px;
+  border-radius: 6px;
+  min-width: 34px;
+}
+.bitmask-cell--on  { background: var(--surface-3); border: 1px solid var(--border-mid); }
+.bitmask-cell--off { background: var(--surface-2); border: 1px solid var(--border); }
+.bitmask-bit { font-family: var(--font-mono); font-size: 13px; font-weight: 700; color: var(--white); }
+.bitmask-cell--off .bitmask-bit { color: var(--gray-600); }
+.bitmask-bit-label { font-size: 8px; color: var(--text-muted); text-transform: uppercase; }
+
+/* ── Stats ────────────────────────────────────────────────── */
+.trace-stats {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 12px;
+  background: var(--surface-2);
+  border-radius: var(--r-md);
+  border: 1px solid var(--border);
+}
+.trace-stat { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.ts-val { font-size: 22px; font-weight: 800; color: var(--white); }
+.ts-lbl { font-size: 9px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+.ts-arrow { font-size: 18px; color: var(--text-muted); }
+
+/* ── Knapsack bar ─────────────────────────────────────────── */
+.knapsack-bar {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  padding: 12px;
+}
+
+/* ── Trace meta grid ──────────────────────────────────────── */
+.trace-meta-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 7px;
+}
+.trace-meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 8px 10px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+}
+.tm-label {
+  font-size: 9px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.tm-value {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--white);
+}
+
+/* ── Graph visual ─────────────────────────────────────────── */
+.graph-visual {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  max-height: 280px;
+  overflow-y: auto;
+}
+.graph-group { display: flex; align-items: flex-start; gap: 10px; }
+.graph-group-label {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  width: 60px;
+  padding-top: 6px;
+  flex-shrink: 0;
+  color: var(--gray-300);
+}
+.graph-nodes { display: flex; flex-wrap: wrap; gap: 5px; }
+.graph-node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 5px 8px;
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  background: var(--surface);
+  transition: border-color var(--t-fast);
+}
+.graph-node:hover { border-color: var(--border-mid); }
+.graph-node-id { font-family: var(--font-mono); font-size: 9px; color: var(--text-muted); }
+.graph-node-name {
+  font-size: 10px;
+  color: var(--text-primary);
+  font-weight: 600;
+  white-space: nowrap;
+  max-width: 80px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.graph-difficulty-dots { display: flex; gap: 2px; }
+.graph-dot { width: 5px; height: 5px; border-radius: 50%; }
+.graph-dot--on  { background: var(--gray-300); }
+.graph-dot--off { background: var(--gray-700); }
+
+.graph-edge-count {
+  display: flex;
+  gap: 16px;
+  padding-top: 8px;
+  border-top: 1px solid var(--border);
+  font-size: 11px;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  align-items: center;
+}
+
+/* ── History panel ────────────────────────────────────────── */
+.history-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+}
+.history-row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.history-day {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  width: 80px;
+  flex-shrink: 0;
+}
+.history-empty { font-size: 11px; color: var(--text-muted); font-style: italic; }
+.history-ids { display: flex; gap: 4px; flex-wrap: wrap; }
+.history-id {
+  padding: 2px 7px;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+  background: var(--surface);
+}
+.history-note {
+  font-size: 11px;
+  color: var(--text-muted);
+  line-height: 1.6;
+  padding: 8px 10px;
+  background: var(--surface);
+  border-radius: 5px;
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: flex-start;
+  gap: 5px;
+}
+.history-note strong { color: var(--white); }

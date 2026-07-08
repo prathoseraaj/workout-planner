@@ -1,0 +1,213 @@
+/* ============================================================
+   FitDSA Global Design System — Premium Black & White
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  /* ── Core Palette ─────────────────────────────────────────── */
+  --black:       #000000;
+  --gray-950:    #0a0a0a;
+  --gray-900:    #111111;
+  --gray-850:    #161616;
+  --gray-800:    #1c1c1c;
+  --gray-700:    #252525;
+  --gray-600:    #2e2e2e;
+  --gray-500:    #3d3d3d;
+  --gray-400:    #555555;
+  --gray-300:    #7a7a7a;
+  --gray-200:    #a0a0a0;
+  --gray-100:    #c8c8c8;
+  --gray-50:     #e8e8e8;
+  --white:       #ffffff;
+
+  /* ── Semantic ─────────────────────────────────────────────── */
+  --bg:          var(--gray-950);
+  --surface:     var(--gray-900);
+  --surface-2:   var(--gray-850);
+  --surface-3:   var(--gray-800);
+  --border:      rgba(255,255,255,0.08);
+  --border-mid:  rgba(255,255,255,0.14);
+  --border-high: rgba(255,255,255,0.22);
+
+  --text-primary:   var(--white);
+  --text-secondary: var(--gray-200);
+  --text-muted:     var(--gray-400);
+
+  /* ── Accent (pure white accents for highlights) ───────────── */
+  --accent:      var(--white);
+  --accent-dim:  rgba(255,255,255,0.12);
+
+  /* ── Typography ───────────────────────────────────────────── */
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+
+  /* ── Radii ────────────────────────────────────────────────── */
+  --r-sm:  6px;
+  --r-md:  10px;
+  --r-lg:  14px;
+  --r-xl:  20px;
+
+  /* ── Transitions ──────────────────────────────────────────── */
+  --t-fast: 120ms ease;
+  --t-base: 220ms ease;
+  --t-slow: 380ms ease;
+}
+
+html, body {
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Scrollbar ─────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: var(--gray-900); }
+::-webkit-scrollbar-thumb { background: var(--gray-600); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--gray-400); }
+
+/* ── Surface card ──────────────────────────────────────────── */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  transition: border-color var(--t-base);
+}
+.card:hover { border-color: var(--border-mid); }
+
+/* Keep glass-card alias for backwards compat */
+.glass-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: 24px;
+  transition: border-color var(--t-base);
+}
+.glass-card:hover { border-color: var(--border-mid); }
+
+/* ── Buttons ───────────────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: var(--r-md);
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: all var(--t-base);
+  white-space: nowrap;
+  letter-spacing: 0.01em;
+}
+.btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none !important; }
+
+.btn-primary {
+  background: var(--white);
+  color: var(--black);
+}
+.btn-primary:hover:not(:disabled) {
+  background: var(--gray-100);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(255,255,255,0.12);
+}
+
+.btn-secondary {
+  background: var(--surface-3);
+  color: var(--text-primary);
+  border: 1px solid var(--border-mid);
+}
+.btn-secondary:hover:not(:disabled) { background: var(--gray-600); border-color: var(--border-high); }
+
+.btn-ghost {
+  background: transparent;
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+}
+.btn-ghost:hover:not(:disabled) { color: var(--text-primary); border-color: var(--border-mid); background: var(--surface-2); }
+
+/* ── Badge ─────────────────────────────────────────────────── */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  background: var(--surface-3);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+}
+
+/* ── Code inline ───────────────────────────────────────────── */
+.code-block, .code-inline {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--gray-100);
+}
+.code-block {
+  background: var(--gray-900);
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  padding: 12px 16px;
+  overflow-x: auto;
+  line-height: 1.7;
+}
+
+/* ── Spinner ───────────────────────────────────────────────── */
+@keyframes spin { to { transform: rotate(360deg); } }
+.spinner {
+  width: 32px; height: 32px;
+  border: 2px solid var(--gray-700);
+  border-top-color: var(--white);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+/* ── Animations ────────────────────────────────────────────── */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.fade-in-up { animation: fadeInUp 0.4s ease forwards; }
+
+@keyframes pulse-ring {
+  0%   { transform: scale(1); opacity: 0.8; }
+  100% { transform: scale(1.8); opacity: 0; }
+}
+
+/* ── Difficulty dots ───────────────────────────────────────── */
+.difficulty-dots { display: flex; gap: 4px; align-items: center; }
+.difficulty-dot  { width: 7px; height: 7px; border-radius: 50%; }
+.difficulty-dot.filled { background: var(--white); }
+.difficulty-dot.empty  { background: var(--gray-700); }
+
+/* ── Grid helpers ──────────────────────────────────────────── */
+.grid-2 { display: grid; grid-template-columns: repeat(2,1fr); gap:16px; }
+.grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap:16px; }
+.grid-4 { display: grid; grid-template-columns: repeat(4,1fr); gap:16px; }
+@media (max-width:768px) { .grid-2,.grid-3,.grid-4 { grid-template-columns:1fr; } }
+@media (max-width:1024px) { .grid-4 { grid-template-columns:repeat(2,1fr); } }
+
+/* ── Divider ───────────────────────────────────────────────── */
+.divider { height:1px; background:var(--border); width:100%; }
