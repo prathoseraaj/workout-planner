@@ -14,8 +14,7 @@
 6. [Exercise Database Schema](#exercise-database-schema)
 7. [API Endpoints](#api-endpoints)
 8. [Complexity Summary Table](#complexity-summary-table)
-9. [How User Profiles Feed the Algorithms](#how-user-profiles-feed-the-algorithms)
-10. [Key Design Decisions](#key-design-decisions)
+9. [Key Design Decisions](#key-design-decisions)
 
 ---
 
