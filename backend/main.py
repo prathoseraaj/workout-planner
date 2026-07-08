@@ -144,8 +144,15 @@ def get_user():
     stats = compute_body_stats(user)
     mask = user["equipment_mask"]
     compatible_count = len(bitmask_filter(EXERCISE_DB, mask))
+
+    # Parse JSON strings back to lists for the frontend
+    equipment = json.loads(user["equipment_list"]) if isinstance(user.get("equipment_list"), str) else user.get("equipment_list", [])
+    target_muscles = json.loads(user["target_muscles"]) if isinstance(user.get("target_muscles"), str) else user.get("target_muscles", [])
+
     return {
         **user,
+        "equipment": equipment,
+        "target_muscles": target_muscles,
         "body_stats": stats,
         "equipment_binary": bin(mask),
         "compatible_exercises": compatible_count,
@@ -177,10 +184,15 @@ def setup_user(req: UserSetup):
     stats = compute_body_stats(saved)
     return {
         "status": "Profile saved",
-        "user": {**saved, "body_stats": stats},
+        "user": {
+            **saved,
+            "equipment": req.equipment,
+            "target_muscles": req.target_muscles,
+            "body_stats": stats,
+            "compatible_exercises": len(bitmask_filter(EXERCISE_DB, mask)),
+        },
         "equipment_mask": mask,
         "equipment_binary": bin(mask),
-        "dsa_note": f"Equipment bitmask {mask} ({bin(mask)}) computed. DSA engine ready.",
     }
 
 
