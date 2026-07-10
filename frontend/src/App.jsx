@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import Onboarding from './components/Onboarding';
 import Dashboard from './components/Dashboard';
-import { checkUserExists, getUser } from './api';
-import { RiCpuLine, RiExternalLinkLine, RiBugLine, RiRadioButtonLine } from 'react-icons/ri';
+import { checkUserExists, getUser, deleteUser } from './api';
+import { RiCpuLine, RiExternalLinkLine, RiBugLine, RiRadioButtonLine, RiLogoutBoxRLine } from 'react-icons/ri';
 import './App.css';
 
-function Navbar({ user }) {
+function Navbar({ user, onLogout }) {
   return (
     <nav className="navbar">
       <div className="nav-inner">
@@ -36,6 +36,16 @@ function Navbar({ user }) {
             <span className="status-dot" />
             Online
           </span>
+          {user && (
+            <button
+              id="logout-btn"
+              className="nav-link nav-logout-btn"
+              onClick={onLogout}
+              title="Logout"
+            >
+              <RiLogoutBoxRLine size={14} /> Logout
+            </button>
+          )}
         </div>
       </div>
     </nav>
@@ -55,6 +65,20 @@ export default function App() {
   const [user, setUser]       = useState(null);
   const [loading, setLoading] = useState(true);
   const [editing, setEditing] = useState(false);
+  const [loggingOut, setLoggingOut] = useState(false);
+
+  const handleLogout = async () => {
+    setLoggingOut(true);
+    try {
+      await deleteUser();
+    } catch (_) {
+      // Even if backend fails, clear local state
+    } finally {
+      setUser(null);
+      setEditing(false);
+      setLoggingOut(false);
+    }
+  };
 
   useEffect(() => {
     checkUserExists()
@@ -79,7 +103,7 @@ export default function App() {
 
   return (
     <div className="app">
-      <Navbar user={user} />
+      <Navbar user={user} onLogout={handleLogout} />
 
       <main className="main">
         {showOnboarding ? (

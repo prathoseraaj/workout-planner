@@ -253,6 +253,13 @@ def get_history():
     }
 
 
+@app.delete("/user")
+def logout_user():
+    """Clear all in-memory data — effectively logs the user out."""
+    storage.clear_all()
+    return {"status": "User data cleared. Please re-run onboarding."}
+
+
 @app.get("/exercises")
 def get_exercises():
     user = storage.get_user_profile()

@@ -98,6 +98,19 @@
   border-color: var(--border);
 }
 
+/* Logout button — stands out with a red tint */
+.nav-logout-btn {
+  background: none;
+  cursor: pointer;
+  color: #e05555;
+  border-color: transparent;
+}
+.nav-logout-btn:hover {
+  color: #ff7070;
+  background: rgba(224, 85, 85, 0.12);
+  border-color: rgba(224, 85, 85, 0.35);
+}
+
 .nav-user {
   display: flex;
   align-items: center;

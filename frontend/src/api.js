@@ -16,5 +16,6 @@ export const generateWorkout  = (body = {}) => api.post('/generate', body);
 export const getHistory       = ()           => api.get('/history');
 export const getExercises     = ()           => api.get('/exercises');
 export const debugBitmask     = ()           => api.get('/debug/bitmask');
+export const deleteUser       = ()           => api.delete('/user');
 
 export default api;
