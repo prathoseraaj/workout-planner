@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Onboarding from './components/Onboarding';
 import Dashboard from './components/Dashboard';
-import { checkUserExists, getUser, deleteUser } from './api';
+import { deleteUser } from './api';
 import { RiCpuLine, RiExternalLinkLine, RiBugLine, RiRadioButtonLine, RiLogoutBoxRLine } from 'react-icons/ri';
 import './App.css';
 
@@ -63,12 +63,9 @@ function LoadingScreen() {
 
 export default function App() {
   const [user, setUser]       = useState(null);
-  const [loading, setLoading] = useState(true);
   const [editing, setEditing] = useState(false);
-  const [loggingOut, setLoggingOut] = useState(false);
 
   const handleLogout = async () => {
-    setLoggingOut(true);
     try {
       await deleteUser();
     } catch (_) {
@@ -76,20 +73,12 @@ export default function App() {
     } finally {
       setUser(null);
       setEditing(false);
-      setLoggingOut(false);
     }
   };
 
+  // Clear backend state on every page load so refresh always shows onboarding
   useEffect(() => {
-    checkUserExists()
-      .then(async res => {
-        if (res.data.exists) {
-          const userRes = await getUser();
-          setUser(userRes.data);
-        }
-      })
-      .catch(() => {})
-      .finally(() => setLoading(false));
+    deleteUser().catch(() => {});
   }, []);
 
   const handleOnboardingComplete = (savedUser) => {
@@ -99,7 +88,6 @@ export default function App() {
 
   const showOnboarding = !user || editing;
 
-  if (loading) return <LoadingScreen />;
 
   return (
     <div className="app">
